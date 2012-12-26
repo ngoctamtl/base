@@ -12,7 +12,6 @@
 
 #define kJumpFactor 0.5
 
-#define degreesToRadians(x) (M_PI * (x) / 180.0)
 #define kAnimationRotateDeg 1.0
 
 @implementation UIView (UIViewAnimatable)

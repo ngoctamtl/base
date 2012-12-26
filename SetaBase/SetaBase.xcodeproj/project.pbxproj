@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2342ECD5162CF305002CB810 /* ResponseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2342ECD4162CF305002CB810 /* ResponseObject.m */; };
+		235EFF20168B776000621C37 /* FXLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 235EFF1F168B776000621C37 /* FXLabel.m */; };
 		4298CC3115D42D3E002BEA13 /* GCD+RBExtras.c in Sources */ = {isa = PBXBuildFile; fileRef = 4298CC2F15D42D3E002BEA13 /* GCD+RBExtras.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4299AB3D15D39B4900C2A459 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4299AB3C15D39B4900C2A459 /* UIKit.framework */; };
 		4299AB3F15D39B4900C2A459 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4299AB3E15D39B4900C2A459 /* Foundation.framework */; };
@@ -93,6 +94,8 @@
 /* Begin PBXFileReference section */
 		2342ECD3162CF305002CB810 /* ResponseObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResponseObject.h; sourceTree = "<group>"; };
 		2342ECD4162CF305002CB810 /* ResponseObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResponseObject.m; sourceTree = "<group>"; };
+		235EFF1E168B776000621C37 /* FXLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXLabel.h; sourceTree = "<group>"; };
+		235EFF1F168B776000621C37 /* FXLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXLabel.m; sourceTree = "<group>"; };
 		4212C43815E1F72500A69AAB /* Macro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Macro.h; sourceTree = "<group>"; };
 		4298CC2F15D42D3E002BEA13 /* GCD+RBExtras.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "GCD+RBExtras.c"; sourceTree = "<group>"; };
 		4298CC3015D42D3E002BEA13 /* GCD+RBExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GCD+RBExtras.h"; sourceTree = "<group>"; };
@@ -273,6 +276,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		235EFF1D168B776000621C37 /* FXLabel */ = {
+			isa = PBXGroup;
+			children = (
+				235EFF1E168B776000621C37 /* FXLabel.h */,
+				235EFF1F168B776000621C37 /* FXLabel.m */,
+			);
+			path = FXLabel;
+			sourceTree = "<group>";
+		};
 		4299AB2D15D39B4900C2A459 = {
 			isa = PBXGroup;
 			children = (
@@ -352,6 +364,7 @@
 		4299ABF615D39EEE00C2A459 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				235EFF1D168B776000621C37 /* FXLabel */,
 				4299AC9015D3A15200C2A459 /* Reachability */,
 				4299ABF715D39EEE00C2A459 /* AFNetworking */,
 				4299AC0D15D39EEE00C2A459 /* AsyncImageView */,
@@ -846,6 +859,7 @@
 				429CEAED15DC0BC7002B3DE0 /* Session.m in Sources */,
 				429C618A15E0902200D6D854 /* BaseViewController.m in Sources */,
 				2342ECD5162CF305002CB810 /* ResponseObject.m in Sources */,
+				235EFF20168B776000621C37 /* FXLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
