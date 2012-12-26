@@ -9,7 +9,6 @@
 #import "Util.h"
 #import "NSString+Extension.h"
 #import "AFJSONUtilities.h"
-#import "FXLabel.h"
 
 #define kCalendarType NSYearCalendarUnit | NSMonthCalendarUnit | NSWeekCalendarUnit | NSWeekdayCalendarUnit | NSWeekdayOrdinalCalendarUnit | NSWeekOfMonthCalendarUnit | NSWeekOfYearCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit | NSTimeZoneCalendarUnit
 

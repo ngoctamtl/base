@@ -10,7 +10,6 @@
 #import "MBProgressHUD.h"
 #import "AppDelegate.h"
 
-@class FXLabel;
 @interface Util : NSObject {
     MBProgressHUD *HUD;
 }
