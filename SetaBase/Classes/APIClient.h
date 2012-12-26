@@ -13,6 +13,18 @@
 #import "ResponseObject.h"
 
 //JSON Keys
+#define kJSONSuccess					200
+#define kJSONInternalNetworkError       500
+#define kJSONParseError					-1
+#define kJSONUnauthorizedError			401
+#define kJSONForbiddenError				403
+#define kJSONPaymentRequiredError		402
+#define kJSONPreconditionFailedError	412
+#define kJSONRequestTimeoutError		408
+#define kJSONConflictError				409
+#define kJSONBadRequestError			400
+#define kJSONNotFoundError				404
+#define kJSONNoInternetConnection       0
 
 @interface APIClient : AFHTTPClient
 
@@ -21,7 +33,8 @@
 //Define all API functions here
 
 // Sample /////////////////////
-//- (void)getLocationWithAddress:(NSString *)address block:(void (^)(ResponseObject *responseObject))block;
+//- (void)loginWithFBToken:(NSString *)token
+//				   block:(void (^)(ResponseObject *responseObject))block;
 ///////////////////////////////
 
 @end

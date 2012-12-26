@@ -11,7 +11,7 @@
 @interface ResponseObject : NSObject
 
 @property (nonatomic, strong) id data;
-@property (nonatomic, strong) NSString *errorCode;
+@property (nonatomic, assign) int errorCode;
 @property (nonatomic, strong) NSString *message;
 
 @end

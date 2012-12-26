@@ -37,22 +37,34 @@
 - (void)handleSuccess:(id)responseData block:(void (^)(ResponseObject *responseObject))block
 {
     if (block) {
-        DLog(@"Server response string: %@", [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding]);
-        NSError *error;
-        NSDictionary *responseDict = AFJSONDecode(responseData, &error);
+		NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+        DLog(@"Server response string: %@", responseString);
+		
+        NSError *error = nil;
+        NSDictionary *responseDict;
+		if (responseData) {
+			responseDict = AFJSONDecode(responseData, &error);
+		} else {
+			responseDict = nil;
+		}
+		
         DLog(@"Server response dict: %@", responseDict);
 		
 		ResponseObject *responseObject = [[ResponseObject alloc] init];
 		
 		if (error) {
 			DLog(@"Parse Error: %@",[error description]);
-			responseObject.errorCode = @""; //Error code for decode error
+			//			responseObject.errorCode = kJSONParseError; //Error code for decode error
+			//			responseObject.data = nil;
+			//			responseObject.message = @"Server error!";
+			
+			responseObject.errorCode = kJSONSuccess;
 			responseObject.data = nil;
-			responseObject.message = @"";
+			responseObject.message = responseString;
 		} else {
-			responseObject.errorCode = @"";
-			responseObject.data = nil;
-			responseObject.message = @"";
+			responseObject.errorCode = kJSONSuccess;
+			responseObject.data = responseDict;
+			responseObject.message = @"Success!";
 		}
 		
         block(responseObject);
@@ -64,40 +76,70 @@
  */
 - (void)handleFailed:(NSError *)error block:(void (^)(ResponseObject *responseObject))block
 {
-    DLog(@"%@", [error localizedDescription]);
     if (block) {
         ResponseObject *responseObject = [[ResponseObject alloc] init];
-
-		responseObject.errorCode = @""; //Error code for network error
-		responseObject.data = nil;
-		responseObject.message = @"";
 		
+		responseObject.errorCode = error.code;
+		responseObject.data = nil;
+		responseObject.message = [error.userInfo objectForKey:@"message"];
+		
+		DLog(@"API Error: \n{\n\tURL: %@\n\tError: %d\n\tResponse: %@\n}",error.domain, error.code, responseObject.message);
         block(responseObject);
     }
 }
 
+/*
+ * Process response
+ */
+- (void)processOperation:(AFHTTPRequestOperation *)operation withData:(id)responseObject block:(void (^)(ResponseObject *))block {
+	//If response code != 200 --> Failed
+	DLog(@"API: [%@]. Status code: [%d]", operation.request.URL.absoluteString, [operation.response statusCode]);
+	
+	if ([operation.response statusCode] != kJSONSuccess) {
+		NSError *errorParser = nil;
+        NSDictionary *responseDict;
+		if (operation.responseData) {
+			responseDict = AFJSONDecode(operation.responseData, &errorParser);
+		} else {
+			responseDict = nil;
+		}
+		
+        DLog(@"Server response dict: %@", responseDict);
+		NSString *message = @"";
+		if (responseDict && !errorParser) {
+			message = [responseDict objectForKey:@"error"];
+		} else {
+			message = operation.responseString;
+		}
+		
+		NSDictionary* userInfo = [NSDictionary dictionaryWithObjectsAndKeys:message, @"message", nil];
+		
+		NSError *error = [[NSError alloc] initWithDomain:operation.request.URL.absoluteString code:operation.response.statusCode userInfo:userInfo];
+		[self handleFailed:error block:block];
+		return;
+	}
+	[self handleSuccess:responseObject block:block];
+}
+
 //Implement all API functions here
 // Sample //////////////////
-/*
-- (void)registerPresentWithId:(NSNumber *)presentId block:(void (^)(ResponseObject *responseObject))block
-{
-    NSString *path = [NSString stringWithFormat:@"api/present/%d/register", [presentId intValue]];
-    NSString *ticketType = [[NSUserDefaults standardUserDefaults] valueForKey:kCurrentTicketType];
+//- (void)loginWithFBToken:(NSString *)token
+//				   block:(void (^)(ResponseObject *responseObject))block
+//{
+//	NSString *path = kAPIURLLoginFB;
+//    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+//							token, kJSONFacebookToken,
+//							nil];
+//	DLog(@"Params: %@", params);
+//	
+//    [self postPath:path parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        [self processOperation:operation withData:responseObject block:block];
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//		[self processOperation:operation withData:nil block:block];
+//    }];
+//	
+//}
 
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-                            [[NSUserDefaults standardUserDefaults] valueForKey:kAccessToken], kJsonAccessToken,
-                            [presentId stringValue], @"present_id",
-                            ticketType, @"entryType",
-                            nil];
-    DLog(@"%@", params);
-    [self postPath:path parameters:params success:^(AFHTTPRequestOperation *operation, id responseData) {
-        [self handleSuccess:responseData block:block];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        DLog(@"%@", [[NSString alloc] initWithData:operation.responseData encoding:NSUTF8StringEncoding]);
-        [self handleFailed:error block:block];
-    }];
-}
- */
 ////////////////////////////
 
 
