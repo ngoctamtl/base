@@ -26,11 +26,13 @@
 
 + (NSArray *)all;
 + (NSArray *)where:(id)condition;
++ (NSArray *)whereFormat:(NSString *)format, ...;
 
 
 
 #pragma mark - Custom Context
 
++ (id)createInContext:(NSManagedObjectContext *)context;
 + (id)create:(NSDictionary *)attributes inContext:(NSManagedObjectContext *)context;
 
 + (void)deleteAllInContext:(NSManagedObjectContext *)context;

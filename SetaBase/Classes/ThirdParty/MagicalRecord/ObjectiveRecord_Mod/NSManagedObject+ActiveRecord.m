@@ -25,6 +25,14 @@
     return [self fetchWithPredicate:nil inContext:context];
 }
 
++ (NSArray *)whereFormat:(NSString *)format, ... {
+    va_list va_arguments;
+    va_start(va_arguments, format);
+    NSString *condition = [[NSString alloc] initWithFormat:format arguments:va_arguments];
+    va_end(va_arguments);
+
+    return [self where:condition];
+}
 
 + (NSArray *)where:(id)condition {
     
@@ -34,7 +42,10 @@
 
 + (NSArray *)where:(id)condition inContext:(NSManagedObjectContext *)context {
     
-    return [self fetchWithPredicate:[self predicateFromStringOrDict:condition]
+    NSPredicate *predicate = ([condition isKindOfClass:[NSPredicate class]]) ? condition :
+                                                [self predicateFromStringOrDict:condition];
+    
+    return [self fetchWithPredicate:predicate
                           inContext:context];
 }
 
@@ -55,6 +66,11 @@
     
     [newEntity setValuesForKeysWithDictionary:attributes];
     return newEntity;
+}
+
++ (id)createInContext:(NSManagedObjectContext *)context {
+    return [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass(self)
+                                         inManagedObjectContext:context];
 }
 
 - (BOOL)save {
@@ -85,8 +101,8 @@
     NSMutableString *queryString = [NSMutableString new];
     
     [conditions.allKeys each:^(id attribute) {
-        [queryString appendFormat:@"%@ == '%@'",
-         attribute, [conditions valueForKey:attribute]];
+        [queryString appendFormat:@"%@ == '%@'", attribute, [conditions valueForKey:attribute]];
+
         if (attribute == conditions.allKeys.last) return;
         [queryString appendString:@" AND "];
     }];
