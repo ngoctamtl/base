@@ -408,16 +408,11 @@
 
 + (NSDate*)convertTwitterDateToNSDate:(NSString*)created_at
 {
-    // Sat, 11 Dec 2010 01:35:52 +0000
-    static NSDateFormatter* df = nil;
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+	[dateFormatter setDateFormat:@"EEE LLL d HH:mm:ss Z yyyy"];
+	[dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"US"]];
 	
-    df = [[NSDateFormatter alloc] init];
-    [df setTimeStyle:NSDateFormatterFullStyle];
-    [df setFormatterBehavior:NSDateFormatterBehavior10_4];
-    [df setDateFormat:@"EEE LLL d HH:mm:ss Z yyyy"];
-	
-    NSDate* convertedDate = [df dateFromString:created_at];
-    [df release];
+	NSDate *convertedDate = [dateFormatter dateFromString:created_at];
 	
     return convertedDate;
 }
