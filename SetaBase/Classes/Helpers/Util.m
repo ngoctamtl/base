@@ -413,6 +413,7 @@
 	[dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"US"]];
 	
 	NSDate *convertedDate = [dateFormatter dateFromString:created_at];
+	[dateFormatter release];
 	
     return convertedDate;
 }
