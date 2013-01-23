@@ -30,7 +30,7 @@
     va_start(va_arguments, format);
     NSString *condition = [[NSString alloc] initWithFormat:format arguments:va_arguments];
     va_end(va_arguments);
-
+	
     return [self where:condition];
 }
 
@@ -43,7 +43,7 @@
 + (NSArray *)where:(id)condition inContext:(NSManagedObjectContext *)context {
     
     NSPredicate *predicate = ([condition isKindOfClass:[NSPredicate class]]) ? condition :
-                                                [self predicateFromStringOrDict:condition];
+	[self predicateFromStringOrDict:condition];
     
     return [self fetchWithPredicate:predicate
                           inContext:context];
@@ -102,7 +102,7 @@
     
     [conditions.allKeys each:^(id attribute) {
         [queryString appendFormat:@"%@ == '%@'", attribute, [conditions valueForKey:attribute]];
-
+		
         if (attribute == conditions.allKeys.last) return;
         [queryString appendString:@" AND "];
     }];
@@ -143,16 +143,18 @@
 
 - (BOOL)saveTheContext {
     NSManagedObjectContext *localContext = [NSManagedObjectContext defaultContext];
-    
+    DLog(@"Start save context for %@", [self class]);
+	
     if (localContext == nil) return YES;
     if (![localContext hasChanges])return YES;
     
     __block BOOL ret = YES;
-    [localContext saveErrorHandler:^(NSError *error) {
-        NSLog(@"Unresolved error in saving entity: %@!\n Error:%@", self, error);
+	
+    [localContext saveInBackgroundErrorHandler:^(NSError *error) {
+		NSLog(@"Unresolved error in saving entity: %@!\n Error:%@", self, error);
         ret = NO;
-    }];
-    
+	}];
+	
     if (ret)
         NSLog(@"Save an object of '%@' done.",[self class]);
     

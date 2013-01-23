@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2342ECD5162CF305002CB810 /* ResponseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2342ECD4162CF305002CB810 /* ResponseObject.m */; };
+		2398DD7616AFC06600BD491A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2398DD7516AFC06600BD491A /* Default-568h@2x.png */; };
 		4298CC3115D42D3E002BEA13 /* GCD+RBExtras.c in Sources */ = {isa = PBXBuildFile; fileRef = 4298CC2F15D42D3E002BEA13 /* GCD+RBExtras.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4299AB3D15D39B4900C2A459 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4299AB3C15D39B4900C2A459 /* UIKit.framework */; };
 		4299AB3F15D39B4900C2A459 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4299AB3E15D39B4900C2A459 /* Foundation.framework */; };
@@ -93,6 +94,7 @@
 /* Begin PBXFileReference section */
 		2342ECD3162CF305002CB810 /* ResponseObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResponseObject.h; sourceTree = "<group>"; };
 		2342ECD4162CF305002CB810 /* ResponseObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResponseObject.m; sourceTree = "<group>"; };
+		2398DD7516AFC06600BD491A /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		4212C43815E1F72500A69AAB /* Macro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Macro.h; sourceTree = "<group>"; };
 		4298CC2F15D42D3E002BEA13 /* GCD+RBExtras.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "GCD+RBExtras.c"; sourceTree = "<group>"; };
 		4298CC3015D42D3E002BEA13 /* GCD+RBExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GCD+RBExtras.h"; sourceTree = "<group>"; };
@@ -273,12 +275,68 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2398DD7316AFC06600BD491A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2398DD7416AFC06600BD491A /* Images */,
+				2398DD7716AFC09100BD491A /* Audio */,
+				2398DD7816AFC09100BD491A /* HTML */,
+				2398DD7916AFC09100BD491A /* JSON */,
+				2398DD7A16AFC09100BD491A /* Others */,
+				2398DD7B16AFC09100BD491A /* Video */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		2398DD7416AFC06600BD491A /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				2398DD7516AFC06600BD491A /* Default-568h@2x.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		2398DD7716AFC09100BD491A /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
+		2398DD7816AFC09100BD491A /* HTML */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = HTML;
+			sourceTree = "<group>";
+		};
+		2398DD7916AFC09100BD491A /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = JSON;
+			sourceTree = "<group>";
+		};
+		2398DD7A16AFC09100BD491A /* Others */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Others;
+			sourceTree = "<group>";
+		};
+		2398DD7B16AFC09100BD491A /* Video */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Video;
+			sourceTree = "<group>";
+		};
 		4299AB2D15D39B4900C2A459 = {
 			isa = PBXGroup;
 			children = (
 				4299ABF615D39EEE00C2A459 /* ThirdParty */,
 				4299AB4215D39B4900C2A459 /* Classes */,
-				4299AC8B15D3A0D000C2A459 /* Resources */,
+				2398DD7316AFC06600BD491A /* Resources */,
 				4299AB4315D39B4900C2A459 /* Supporting Files */,
 				4299AB3B15D39B4900C2A459 /* Frameworks */,
 				4299AB3915D39B4900C2A459 /* Products */,
@@ -312,8 +370,8 @@
 		4299AB4215D39B4900C2A459 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				4299AD2415D3B8DF00C2A459 /* Helpers */,
 				4299AC8715D3A09A00C2A459 /* Common */,
+				4299AD2415D3B8DF00C2A459 /* Helpers */,
 				4299AC8615D3A08500C2A459 /* Model */,
 				4299ACD415D3A62E00C2A459 /* Categories */,
 				4299ACA115D3A2A600C2A459 /* Enums */,
@@ -574,46 +632,6 @@
 			name = DataManager;
 			sourceTree = "<group>";
 		};
-		4299AC8B15D3A0D000C2A459 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				4299AC8C15D3A0ED00C2A459 /* Images */,
-				4299AC8F15D3A10700C2A459 /* HTML */,
-				4299AC9F15D3A23700C2A459 /* Fonts */,
-				4299AC8E15D3A10200C2A459 /* Video */,
-				4299AC8D15D3A0F500C2A459 /* Audio */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
-		4299AC8C15D3A0ED00C2A459 /* Images */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Images;
-			sourceTree = "<group>";
-		};
-		4299AC8D15D3A0F500C2A459 /* Audio */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Audio;
-			sourceTree = "<group>";
-		};
-		4299AC8E15D3A10200C2A459 /* Video */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Video;
-			sourceTree = "<group>";
-		};
-		4299AC8F15D3A10700C2A459 /* HTML */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = HTML;
-			sourceTree = "<group>";
-		};
 		4299AC9015D3A15200C2A459 /* Reachability */ = {
 			isa = PBXGroup;
 			children = (
@@ -621,13 +639,6 @@
 				4299AC9215D3A15200C2A459 /* Reachability.m */,
 			);
 			path = Reachability;
-			sourceTree = "<group>";
-		};
-		4299AC9F15D3A23700C2A459 /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Fonts;
 			sourceTree = "<group>";
 		};
 		4299ACA015D3A27200C2A459 /* CustomControls */ = {
@@ -766,6 +777,7 @@
 			files = (
 				4299AB4715D39B4900C2A459 /* InfoPlist.strings in Resources */,
 				4299AB5315D39B4900C2A459 /* ViewController.xib in Resources */,
+				2398DD7616AFC06600BD491A /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
