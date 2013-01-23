@@ -42,15 +42,6 @@
     return [regExPredicate evaluateWithObject:email];
 }
 
-+ (BOOL)validateUsername:(NSString*)username
-{
-    NSString *usernamelRegEx =
-    @"(?:www\\.)?((?!-)[a-zA-Z0-9-_]{2,63}(?<!-))\\.?((?:[a-zA-Z0-9]{2,})?(?:\\.[a-zA-Z0-9]{2,})?)";
-    NSPredicate *userNameValidation =
-    [NSPredicate predicateWithFormat:@"SELF MATCHES %@", usernamelRegEx];
-    return [userNameValidation evaluateWithObject:username];
-}
-
 - (void)dealloc {
     [HUD release];
     HUD = nil;
@@ -67,12 +58,14 @@
     [alert show];
     [alert release];
 }
+
 + (void)showMessage:(NSString *)message withTitle:(NSString *)title andDelegate:(id)delegate
 {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:delegate cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
     [alert show];
     [alert release];
 }
+
 + (void)showMessage:(NSString *)message withTitle:(NSString *)title delegate:(id)delegate andTag:(NSInteger)tag
 {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:delegate cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
@@ -80,6 +73,7 @@
     [alert show];
     [alert release];
 }
+
 + (void)showMessage:(NSString *)message withTitle:(NSString *)title cancelButtonTitle:(NSString *)cancelTitle otherButtonTitles:(NSString *)otherTitle delegate:(id)delegate andTag:(NSInteger)tag
 {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:delegate cancelButtonTitle:cancelTitle otherButtonTitles:otherTitle, nil];
@@ -88,6 +82,7 @@
     [alert show];
     [alert release];
 }
+
 + (NSDate *)dateFromString:(NSString *)dateString withFormat:(NSString *)dateFormat {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
@@ -104,6 +99,7 @@
     [formatter release];
     return ret;
 }
+
 + (NSString *)stringFromDateString:(NSString *)dateString
 {
     NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
@@ -115,57 +111,7 @@
     [formatter setDateFormat:@"MM/dd/yyyy h:mm a"];
     return [formatter stringFromDate:utcDate];
 }
-+(NSString *)timeStringSinceDate:(NSDate *)sinceDate
-{
-    int years = 0;
-    int months = 0;
-    int weeks = 0;
-    int days = 0;
-    int hours = 0;
-    int minutes = 0;
-    NSString *ret = @"Just now";
-    NSDateComponents *sinceDateComponents = [[NSCalendar currentCalendar] components:kCalendarType fromDate:sinceDate];
-    NSDateComponents *todayDateComponents = [[NSCalendar currentCalendar] components:kCalendarType fromDate:[NSDate date]];
-    if (todayDateComponents.year > sinceDateComponents.year) {
-        years = todayDateComponents.year - sinceDateComponents.year;
-        ret = [NSString stringWithFormat:@"%d %@",years,years > 1 ? @"years ago":@"year ago"];
-    }else
-    {
-        // equal to year
-        if (todayDateComponents.month > sinceDateComponents.month) {
-            months = todayDateComponents.month - sinceDateComponents.month;
-            ret = [NSString stringWithFormat:@"%d %@",months,months > 1 ? @"months ago":@"month ago"];
-        }else
-        {
-            // equal to month
-            if (todayDateComponents.weekOfMonth > sinceDateComponents.weekOfMonth) {
-                weeks = todayDateComponents.weekOfMonth - sinceDateComponents.weekOfMonth;
-                ret = [NSString stringWithFormat:@"%d %@",weeks,weeks > 1 ? @"weeks ago":@"week ago"];
-            }else
-            {
-                if (todayDateComponents.day > sinceDateComponents.day) {
-                    days = todayDateComponents.day - sinceDateComponents.day;
-                    ret = [NSString stringWithFormat:@"%d %@",days,days > 1 ? @"days ago":@"day ago"];
-                }else
-                {
-                    if (todayDateComponents.hour > sinceDateComponents.hour) {
-                        hours = todayDateComponents.hour - sinceDateComponents.hour;
-                        ret = [NSString stringWithFormat:@"%d %@",hours,hours > 1 ? @"hours ago":@"hour ago"];
-                    }else
-                    {
-                        if (todayDateComponents.minute > sinceDateComponents.minute) {
-                            minutes = todayDateComponents.minute - sinceDateComponents.minute;
-                            ret = [NSString stringWithFormat:@"%d %@",minutes,minutes > 1 ? @"mins ago":@"min ago"];
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    return ret;
-	
-}
+
 #pragma mark
 + (NSString*)getString:(NSInteger)i {
     return [[NSNumber numberWithInt:i] stringValue];
@@ -380,11 +326,6 @@
     printf("--------------------------------------------------------------------\n");
 }
 
-+ (UIFont *)fontMyriadProBoldCondWithSize:(CGFloat)fontSize
-{
-    return [UIFont fontWithName:@"MyriadPro-BoldCond" size:fontSize];
-}
-
 + (UIFont *)fontHelveticaWithSize:(CGFloat)fontSize
 {
     return [UIFont fontWithName:@"Helvetica" size:fontSize];
@@ -405,7 +346,6 @@
     return [UIFont fontWithName:@"Helvetica-Oblique" size:fontSize];
 }
 
-
 + (NSDate*)convertTwitterDateToNSDate:(NSString*)created_at
 {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -416,17 +356,6 @@
 	[dateFormatter release];
 	
     return convertedDate;
-}
-
-+ (BOOL)isASCIIString:(NSString *)string
-{
-    for (NSInteger i = 0; i < string.length; i++) {
-        NSInteger c = [string characterAtIndex:i];
-        if (c < 32 || c >= 127) {
-            return NO;
-        }
-    }
-    return YES;
 }
 
 @end

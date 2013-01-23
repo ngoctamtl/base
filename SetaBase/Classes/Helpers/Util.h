@@ -16,12 +16,14 @@
 
 + (Util *) sharedUtil;
 + (AppDelegate *)appDelegate;
+
 + (BOOL)validateEmail:(NSString*)email;
-+ (BOOL)validateUsername:(NSString*)username;
+
 + (void)showMessage:(NSString *)message withTitle:(NSString *)title;
 + (void)showMessage:(NSString *)message withTitle:(NSString *)title andDelegate:(id)delegate;
 + (void)showMessage:(NSString *)message withTitle:(NSString *)title delegate:(id)delegate andTag:(NSInteger)tag;
 + (void)showMessage:(NSString *)message withTitle:(NSString *)title cancelButtonTitle:(NSString *)cancelTitle otherButtonTitles:(NSString *)otherTitle delegate:(id)delegate andTag:(NSInteger)tag;
+
 + (NSDate *)dateFromString:(NSString *)dateString withFormat:(NSString *)dateFormat;
 + (NSString *)stringFromDate:(NSDate *)date withFormat:(NSString *)dateFormat;
 + (NSString *)stringFromDateString:(NSString *)dateString;
@@ -51,10 +53,8 @@
 + (NSString *)convertObjectToJSON:(id)obj;
 
 + (id)getJSONObjectFromFile:(NSString *)file;
-+ (NSString *)timeStringSinceDate:(NSDate *)sinceDate;
 
 + (void)printAllSystemFonts;
-+ (UIFont *)fontMyriadProBoldCondWithSize:(CGFloat)fontSize;
 
 + (UIFont *)fontHelveticaWithSize:(CGFloat)fontSize;
 + (UIFont *)fontHelveticaBoldObliqueWithSize:(CGFloat)fontSize;
@@ -62,7 +62,5 @@
 + (UIFont *)fontHelveticaObliqueWithSize:(CGFloat)fontSize;
 
 + (NSDate*)convertTwitterDateToNSDate:(NSString*)created_at;
-
-+ (BOOL)isASCIIString:(NSString *)string;
 
 @end
