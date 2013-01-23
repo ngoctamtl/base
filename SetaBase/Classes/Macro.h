@@ -9,8 +9,6 @@
 #ifndef SetaBase_Macro_h
 #define SetaBase_Macro_h
 
-#define SAFE_RELEASE(x) [x release]; x = nil;
-
 #define DEFINE_SHARED_INSTANCE_USING_BLOCK(block) \
 static dispatch_once_t pred = 0; \
 __strong static id _sharedObject = nil; \
@@ -136,12 +134,6 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:a]
 
 /** Check iPhone5 **/
 #define IS_IPHONE_5                     (SCREEN_HEIGHT_PORTRAIT == 568)
-
-/** Add Wood BG for some views **/
-#define ADD_WOOD_BG() (self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_wood"]])
-
-/** Add messPatern BG for some views **/
-#define ADD_MESH_BG() (self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"bg_meshPattern"]])
 
 #define LSSTRING(str) NSLocalizedString(str, str)
 
