@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#define SESSION_VERSION @"22012013"
+
 @interface Session : NSObject
 
 @property (nonatomic, retain) NSString *userID;

@@ -47,9 +47,24 @@
  * Save properties to NSUserDefaults
  */
 - (void)save {
-    NSDictionary *allData = [self propertiesDictionary];
-    DLog(@"Save session: %@", allData);
-    [[NSUserDefaults standardUserDefaults] setObject:allData forKey:SESSION_KEY];
+	NSDictionary *allDataTmp = [self propertiesDictionary];
+    NSMutableDictionary *allData = [[NSMutableDictionary alloc] initWithDictionary:allDataTmp];
+	
+	for (id key in [allDataTmp allKeys]) {
+		id value = [allDataTmp objectForKey:key];
+		
+		if (!([value isKindOfClass:[NSString class]] || [value isKindOfClass:[NSNumber class]])) {
+			[allData removeObjectForKey:key];
+//			DLog(@"Remove key: %@", key);
+		}
+	}
+	
+	DLog(@"Save Session: %@", allData);
+	
+	//Save session
+	NSString *sessionKey = [NSString stringWithFormat:@"%@_%@", SESSION_KEY, SESSION_VERSION];
+	
+    [[NSUserDefaults standardUserDefaults] setObject:allData forKey:sessionKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -57,15 +72,22 @@
  * Get all properties from NSUserDefaults
  */
 - (void)getData {
-    NSDictionary *allData = [[NSUserDefaults standardUserDefaults] objectForKey:SESSION_KEY];
+	NSString *sessionKey = [NSString stringWithFormat:@"%@_%@", SESSION_KEY, SESSION_VERSION];
+	
+    NSDictionary *allData = [[NSUserDefaults standardUserDefaults] objectForKey:sessionKey];
     DLog(@"Session's saved data: %@", allData);
-    
+	
     if (allData && ![allData isEqual:[NSNull null]]) {
+		[self initData];
+		
         NSArray *keyArray =  [allData allKeys];
         int count = [keyArray count];
         for (int i=0; i < count; i++) {
             id obj = [allData objectForKey:[keyArray objectAtIndex:i]];
-            [self setValue:obj forKey:[keyArray objectAtIndex:i]];
+			if ([self respondsToSelector:NSSelectorFromString([keyArray objectAtIndex:i])]) {
+				DLog(@"Set Value for key: %@",[keyArray objectAtIndex:i]);
+				[self setValue:obj forKey:[keyArray objectAtIndex:i]];
+			}
         }
     } else {
         //Init some value
